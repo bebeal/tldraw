@@ -1,9 +1,9 @@
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync } from 'fs'
+import { existsSync, mkdirSync, promises, readFileSync, readdirSync, rmSync } from 'fs'
 import { join } from 'path'
 import { optimize } from 'svgo'
 import {
-	readJsonIfExists,
 	REPO_ROOT,
+	readJsonIfExists,
 	writeCodeFile,
 	writeFile,
 	writeJsonFile,
@@ -401,29 +401,43 @@ async function writeAssetDeclarationDTSFile() {
 	await writeCodeFile('scripts/refresh-assets.ts', 'typescript', assetDeclarationFilePath, dts)
 }
 
-async function copyVersionToDotCom() {
-	const packageVersion = await import(join(REPO_ROOT, 'packages', 'tldraw', 'package.json')).then(
-		(pkg) => pkg.version
+async function directoryExists(path: string): Promise<boolean> {
+	try {
+		const stat = await promises.stat(path)
+		return stat.isDirectory()
+	} catch {
+		return false
+	}
+}
+
+async function copyVersionToDotCom(): Promise<void> {
+	const tldrawPackageJsonPath = join(REPO_ROOT, 'packages', 'tldraw', 'package.json')
+	const dotcomVersionPath = join(REPO_ROOT, 'apps', 'dotcom', 'version.ts')
+	const editorVersionPath = join(REPO_ROOT, 'packages', 'editor', 'src', 'version.ts')
+	const tldrawUiVersionPath = join(
+		REPO_ROOT,
+		'packages',
+		'tldraw',
+		'src',
+		'lib',
+		'ui',
+		'version.ts'
 	)
-	const file = `export const version = '${packageVersion}'`
-	await writeCodeFile(
-		'scripts/refresh-assets.ts',
-		'typescript',
-		join(REPO_ROOT, 'apps', 'dotcom', 'version.ts'),
-		file
-	)
-	await writeCodeFile(
-		'scripts/refresh-assets.ts',
-		'typescript',
-		join(REPO_ROOT, 'packages', 'editor', 'src', 'version.ts'),
-		file
-	)
-	await writeCodeFile(
-		'scripts/refresh-assets.ts',
-		'typescript',
-		join(REPO_ROOT, 'packages', 'tldraw', 'src', 'lib', 'ui', 'version.ts'),
-		file
-	)
+
+	if (await directoryExists(tldrawPackageJsonPath)) {
+		const packageVersion = await import(tldrawPackageJsonPath).then((pkg) => pkg.version)
+		const file = `export const version = '${packageVersion}'`
+
+		if (await directoryExists(dotcomVersionPath)) {
+			await writeCodeFile('scripts/refresh-assets.ts', 'typescript', dotcomVersionPath, file)
+		}
+		if (await directoryExists(editorVersionPath)) {
+			await writeCodeFile('scripts/refresh-assets.ts', 'typescript', editorVersionPath, file)
+		}
+		if (await directoryExists(tldrawUiVersionPath)) {
+			await writeCodeFile('scripts/refresh-assets.ts', 'typescript', tldrawUiVersionPath, file)
+		}
+	}
 }
 
 // --- RUN
