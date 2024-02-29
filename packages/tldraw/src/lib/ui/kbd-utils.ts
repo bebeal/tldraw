@@ -1,3 +1,19 @@
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+/** @internal */
+export const cn = (...inputs: ClassValue[]): string => {
+	return twMerge(clsx(inputs))
+}
+
+/** @internal */
+export function toStartCase(str: string) {
+	return str
+		.split(' ')
+		.map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+		.join(' ')
+}
+
 const isDarwin =
 	typeof window === 'undefined'
 		? false

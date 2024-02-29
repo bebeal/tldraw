@@ -2238,6 +2238,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.23.7":
+  version: 7.24.0
+  resolution: "@babel/runtime@npm:7.24.0"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 8d32c7e116606ea322b89f9fde8ffae6be9503b549dc0d0abb38bd9dc26e87469b9fb7a66964cc089ee558fd0a97d304fb0a3cfec140694764fb0d71b6a6f5e4
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.23.9, @babel/template@npm:^7.3.3":
   version: 7.23.9
   resolution: "@babel/template@npm:7.23.9"
@@ -7040,12 +7049,14 @@ __metadata:
     canvas-size: "npm:^1.2.6"
     chokidar-cli: "npm:^3.0.0"
     classnames: "npm:^2.3.2"
+    clsx: "npm:^2.1.0"
     hotkeys-js: "npm:^3.11.2"
     jest-canvas-mock: "npm:^2.5.2"
     jest-environment-jsdom: "npm:^29.4.3"
     lazyrepo: "npm:0.0.0-alpha.27"
     lz-string: "npm:^1.4.4"
     resize-observer-polyfill: "npm:^1.5.1"
+    tailwind-merge: "npm:^2.2.1"
   peerDependencies:
     react: ^18
     react-dom: ^18
@@ -10241,6 +10252,13 @@ __metadata:
   version: 1.0.4
   resolution: "clone@npm:1.0.4"
   checksum: d06418b7335897209e77bdd430d04f882189582e67bd1f75a04565f3f07f5b3f119a9d670c943b6697d0afb100f03b866b3b8a1f91d4d02d72c4ecf2bb64b5dd
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "clsx@npm:2.1.0"
+  checksum: 2e0ce7c3b6803d74fc8147c408f88e79245583202ac14abd9691e2aebb9f312de44270b79154320d10bb7804a9197869635d1291741084826cff20820f31542b
   languageName: node
   linkType: hard
 
@@ -22247,6 +22265,15 @@ __metadata:
     typical: "npm:^5.2.0"
     wordwrapjs: "npm:^4.0.0"
   checksum: 5dd12bc64ddf246f774fc51b45398dd8da900b7bb246595c84007ea292c15936264701660b80704be17da5d4066a9a250549418c40a2b635a0916c9294b103af
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "tailwind-merge@npm:2.2.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.7"
+  checksum: 3d8aecfa03c077472a038f25e95504ca47c1e7549ab843a854a690509098caac4e2e57790a7cadda4054fd07ec31421980a7afac33547013cf22299788625e72
   languageName: node
   linkType: hard
 
